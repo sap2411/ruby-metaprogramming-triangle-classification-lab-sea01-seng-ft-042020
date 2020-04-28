@@ -1,19 +1,16 @@
 require "pry"
 class Triangle
-  attr_accessor :side1, :side2, :side3
+  attr_reader :side1, :side2, :side3
   def initialize(side1, side2, side3)
     @side1 = side1
     @side2 = side2
     @side3 = side3
-    @sides = [side1, side2, side3]
+    @sides = [side1, side2, side3].max(3)
   end
 
   def valid
-    if @sides.all? {|side| side > 0}
-      sorted = @sides.max(3)
-      if sorted[0] < sorted[1] + sorted[2]
-        return true
-      end
+    if @sides.all? {|side| side > 0} && @sides[0] < @sides[1] + @sides[2]
+      return true
     end
     return false
   end
